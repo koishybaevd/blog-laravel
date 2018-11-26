@@ -4,9 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use Auth;
 
 class PostController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index', 'show');    
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +37,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -37,7 +48,18 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|min:3|max:255',
+            'body' => 'required|min:3'
+        ]);
+
+        Post::create([
+            'title' => request('title'),
+            'body' => request('body'),
+            'user_id' => Auth::id()
+        ]);
+
+        return redirect()->route('posts.index');
     }
 
     /**
@@ -57,9 +79,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -69,9 +91,19 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        $request->validate([
+            'title' => 'required|min:3',
+            'body' => 'required|min:3'
+        ]);
+
+        $post->update([
+            'title' => request('title'),
+            'body' =>request('body')
+        ]);
+
+        return redirect()->route('posts.show', $post->id);
     }
 
     /**
@@ -82,6 +114,8 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Post::destroy($id);
+
+        return redirect('/posts');
     }
 }
