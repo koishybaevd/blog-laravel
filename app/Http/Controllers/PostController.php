@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use App\Post;
 use Auth;
 
@@ -59,6 +60,8 @@ class PostController extends Controller
             'user_id' => Auth::id()
         ]);
 
+        Session::flash('message', 'Your post has now been published!');
+
         return redirect()->route('posts.index');
     }
 
@@ -103,6 +106,8 @@ class PostController extends Controller
             'body' =>request('body')
         ]);
 
+        Session::flash('message', 'Your post has now been updated!');
+
         return redirect()->route('posts.show', $post->id);
     }
 
@@ -115,6 +120,8 @@ class PostController extends Controller
     public function destroy($id)
     {
         Post::destroy($id);
+
+        Session::flash('message', 'Your post has now been deleted!');
 
         return redirect('/posts');
     }

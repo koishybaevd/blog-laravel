@@ -25,7 +25,11 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected function redirectTo()
+    {
+        Session::flash('message', 'Password successfully reset!');
+        return '/home';
+    }
 
     /**
      * Create a new controller instance.
