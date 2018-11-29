@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Post;
 use Auth;
+use Carbon\Carbon;
 
 class PostController extends Controller
 {
@@ -26,8 +27,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(10);
-        
+        $posts = Post::latest()->filter(request(['month', 'year', 'tag']));
+
+        $posts = $posts->paginate(10);
+
         return view('posts.index', compact('posts'));
     }
 
