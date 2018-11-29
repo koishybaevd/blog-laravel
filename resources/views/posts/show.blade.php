@@ -13,14 +13,14 @@
 
 <div class="container my-4">
     <div class="row">
-    <div class="px-2 my-2 ml-2">
-    <i class="fas fa-tags"></i>
-    </div>
-        
+        <div class="px-2 my-2 ml-2">
+            <i class="fas fa-tags"></i>
+        </div>
+
         @foreach($post->tags as $tag)
-        <a href="#" class="bg-secondary text-white px-2 m-2">
+        <a href="/posts/?tag={{ $tag->name }}" class="bg-secondary text-white p-1 m-2">
             <span>{{ $tag->name }}</span>
-            <span>[{{ count($tag->posts) }}]</span>
+            <span class="badge badge-light">{{ count($tag->posts) }}</span>
         </a>
         @endforeach
     </div>
