@@ -44,6 +44,6 @@
 </div>
 @endif
 
-@include('posts.comments')
+@include('comments.index')
 
 @endsection

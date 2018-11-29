@@ -18,12 +18,21 @@
     </div>
 </div>
 
-<ul class="list-group my-4">
+<div class="my-4">
     @foreach($post->comments as $comment)
-    <li class="list-group-item pb-0">
-        <p class="text-muted mb-1">{{ $comment->created_at->toFormattedDateString() }} &nbsp;
-            <a href="#">{{ $comment->user->name }}</a></p>
-        <p>{{ $comment->body }}</p>
-    </li>
+        @if($comment->parent_id === 0)
+        <div class="pb-0">
+            <p class="text-muted mb-1">{{ $comment->created_at->toFormattedDateString() }} &nbsp;
+                <a href="#">{{ $comment->user->name }}</a></p>
+            <p>{{ $comment->body }}</p>
+            <hr>
+
+            @include('comments.comment', ['parent' => $comment])
+        </div>
+   
+        
+
+        @endif
     @endforeach
-</ul>
+    
+</div>
