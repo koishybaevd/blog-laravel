@@ -4,8 +4,13 @@
 
 <div class="blog-post mb-4">
     <h2 class="blog-post-title"><a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a></h2>
-    <p class="blog-post-meta">{{ $post->created_at->toFormattedDateString() }} &nbsp; <a href="#">{{ $post->user->name
-            }}</a></p>
+    <p class="blog-post-meta">
+        by <a href="#">{{ $post->user->name }}</a>
+        <span>at {{ $post->created_at->toFormattedDateString() }}</span>
+        on <a href="{{ route('categories.show', ['id' => $post->category->id]) }}">
+            {{ $post->category->name }}
+        </a>
+    </p>
     <p>{{ $post->body }}</p>
 </div>
 
