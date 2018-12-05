@@ -18,9 +18,8 @@
         </div>
 
         @foreach($post->tags as $tag)
-        <a href="/posts/?tag={{ $tag->name }}" class="bg-secondary text-white p-1 m-2">
+        <a href="/posts/?tag={{ $tag->name }}" class="btn btn-sm btn-outline-dark m-2">
             <span>{{ $tag->name }}</span>
-            <span class="badge badge-light">{{ count($tag->posts) }}</span>
         </a>
         @endforeach
     </div>

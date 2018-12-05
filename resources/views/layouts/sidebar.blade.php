@@ -21,12 +21,12 @@
         <hr>
         <ol class="list-unstyled">
             @foreach($tags as $tag)
-            <li>
-                <a href="/posts/?tag={{ $tag->name }}">
+            
+                <a href="/posts/?tag={{ $tag->name }}" class="btn btn-sm btn-outline-dark">
                     <span>{{ $tag->name }}</span>
-                    <span class="badge badge-secondary">{{ count($tag->posts) }}</span>
+                    <span class="badge badge-light ">{{ count($tag->posts) }}</span>
                 </a>
-            </li>
+            
             @endforeach
         </ol>
     </div>
