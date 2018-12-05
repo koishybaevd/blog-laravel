@@ -1,14 +1,14 @@
-@foreach($comment->replies as $comment)
+@foreach($replies as $reply)
 <div class="ml-3 pb-0">
-    <p class="text-muted mb-1">{{ $comment->created_at->toFormattedDateString() }} &nbsp;
-        <a href="#">{{ $comment->user->name }}</a>
-        <span>for {{ $parent->user->name }}</span>
+    <p class="text-muted mb-1">{{ $reply->created_at->toFormattedDateString() }} &nbsp;
+        <a href="#">{{ $reply->user->name }}</a>
+        <span>for {{ $reply->parent->user->name }}</span>
     </p>
-    <p>{{ $comment->body }}</p>
+    <p>{{ $reply->body }}</p>
     <hr>
-
-    @include('comments.comment', ['parent' => $comment])
-
+    @if(count($reply->replies))
+        @include('comments.comment', ['replies' => $reply->replies])
+    @endif
 </div>    
 @endforeach
 

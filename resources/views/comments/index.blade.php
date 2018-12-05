@@ -26,12 +26,10 @@
                 <a href="#">{{ $comment->user->name }}</a></p>
             <p>{{ $comment->body }}</p>
             <hr>
-
-            @include('comments.comment', ['parent' => $comment])
+            @if(count($comment->replies))
+                @include('comments.comment', ['replies' => $comment->replies])
+            @endif
         </div>
-   
-        
-
         @endif
     @endforeach
     
