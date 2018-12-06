@@ -47,6 +47,16 @@
                     </div>
                 </li>
                 @endguest
+                <!-- Search posts -->
+                <li class="nav-item d-flex align-content-center ml-md-3 ml-sm-0">
+                    <form action="{{ route('searchPosts') }}" method="get" class="form-inline my-2 my-lg-0">
+                            <div class="input-group input-group-sm">
+                                <input name="q" type="text" class="form-control mr-sm-2" placeholder="Search posts..."
+                            autocomplete="off" required>
+                            </div>
+                        <button class="btn btn-sm btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </li>
             </ul>
         </div>
     </div>

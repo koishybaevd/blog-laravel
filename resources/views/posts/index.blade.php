@@ -3,14 +3,11 @@
 @section('content')
 
 @isset($category)
-
-
-    <div class="card mb-3">
-            <div class="card-body px-3 py-2">
-              <h6 class="card-text font-weight-bold">Category: {{ $category->name }}</h5>
-            </div>
-          </div>
-    
+<div class="card mb-3">
+    <div class="card-body px-3 py-2">
+        <h6 class="card-text font-weight-bold">Category: {{ $category->name }}</h5>
+    </div>
+</div>
 @endisset
 
 @foreach($posts as $post)
