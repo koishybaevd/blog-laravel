@@ -32,7 +32,7 @@ class RegisterController extends Controller
     protected function redirectTo()
     {
         Session::flash('message', 'Thanks for registering!');
-        return '/home';
+        return '/posts';
     }
 
     /**

@@ -28,7 +28,7 @@ class ResetPasswordController extends Controller
     protected function redirectTo()
     {
         Session::flash('message', 'Password successfully reset!');
-        return '/home';
+        return '/posts';
     }
 
     /**

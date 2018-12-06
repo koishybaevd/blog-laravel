@@ -13,5 +13,3 @@ Route::resource('categories', 'CategoryController');
 Route::resource('comments', 'CommentController');
 
 Route::get('/search', 'SearchController@searchPosts')->name('searchPosts');
-
-Route::get('/home', 'HomeController@index')->name('home');
