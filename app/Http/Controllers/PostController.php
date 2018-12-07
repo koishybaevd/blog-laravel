@@ -27,8 +27,8 @@ class PostController extends Controller
      */
     public function index()
     {
+        
         $posts = Post::latest()->filter(request(['month', 'year', 'tag']));
-
         $posts = $posts->paginate(10);
 
         return view('posts.index', compact('posts'));
@@ -41,7 +41,10 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        $categories = \App\Category::all();
+        $tags = \App\Tag::all();
+
+        return view('posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -54,14 +57,20 @@ class PostController extends Controller
     {
         $request->validate([
             'title' => 'required|min:3|max:255',
-            'body' => 'required|min:3'
+            'body' => 'required|min:3',
+            'category' => 'required',
+            'tags' => 'required|array',
+            'tags.*' => 'required'
         ]);
 
-        Post::create([
+        $post = Post::create([
             'title' => request('title'),
             'body' => request('body'),
-            'user_id' => Auth::id()
+            'user_id' => Auth::id(),
+            'category_id' => request('category')
         ]);
+
+        $post->tags()->sync(request('tags'));
 
         Session::flash('message', 'Your post has now been published!');
 
